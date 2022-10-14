@@ -1,6 +1,6 @@
 package com.example.tripmanagement.model;
 
-import java.util.Date;
+import android.text.Editable;
 
 public class Trip {
     private int tripId;
@@ -9,9 +9,11 @@ public class Trip {
     private String date;
     private String riskAssessment;
     private String description;
-    private String budget;
+    private String currency;
+    private Double budget;
 
-    public Trip(int tripId, String tripName, String destination, String date, String riskAssessment, String description, String budget) {
+
+    public Trip(int tripId, String tripName, String destination, String date, String riskAssessment, String description, Double budget, String currency) {
         this.tripId = tripId;
         this.tripName = tripName;
         this.destination = destination;
@@ -19,6 +21,7 @@ public class Trip {
         this.riskAssessment = riskAssessment;
         this.description = description;
         this.budget = budget;
+        this.currency = currency;
     }
 
     public int getTripId() {
@@ -69,11 +72,21 @@ public class Trip {
         this.description = description;
     }
 
-    public String getBudget() {
+    public Double getBudget() {
         return budget;
     }
 
-    public void setBudget(String budget) {
+    public void setBudget(Double budget) {
         this.budget = budget;
     }
+
+    public String getCurrency() {
+        return currency;
+    }
+
+    public void setCurrency(String currency) {
+        this.currency = currency;
+    }
+
+
 }

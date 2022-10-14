@@ -85,7 +85,7 @@
                 android:fontFamily="@font/lora_variablefont_wght"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                tools:text="Da Nang Trip" />
+                tools:text="Da Nang" />
 
         </LinearLayout>
 
@@ -111,7 +111,7 @@
                 android:fontFamily="@font/lora_variablefont_wght"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                tools:text="Da Nang Trip" />
+                tools:text="StartDate" />
 
         </LinearLayout>
 
@@ -137,7 +137,33 @@
                 android:fontFamily="@font/lora_variablefont_wght"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                tools:text="Da Nang Trip" />
+                tools:text="Da Nang Trip is great" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="4dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:fontFamily="@font/lora_variablefont_wght"
+                android:text="@string/confirm_currency"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_confirm_currency"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/lora_variablefont_wght"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                tools:text="$" />
 
         </LinearLayout>
 
@@ -163,7 +189,7 @@
                 android:fontFamily="@font/lora_variablefont_wght"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                tools:text="Da Nang Trip" />
+                tools:text="$8000" />
 
         </LinearLayout>
 

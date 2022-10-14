@@ -144,6 +144,68 @@
         tools:text="sample text" />
 
     <TextView
+        android:id="@+id/tv_budget_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:drawablePadding="4dp"
+        android:gravity="center_vertical"
+        android:text="@string/budget_cap"
+        android:textColor="@color/white"
+        app:drawableLeftCompat="@drawable/ic_baseline_budget_24"
+        app:layout_constraintStart_toStartOf="@id/tv_date_title"
+        app:layout_constraintTop_toBottomOf="@id/tv_date_title" />
+
+    <TextView
+        android:id="@+id/tv_budget_info"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="16dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+
+
+        app:layout_constraintBottom_toBottomOf="@id/tv_budget_title"
+        app:layout_constraintStart_toEndOf="@id/tv_budget_title"
+        app:layout_constraintTop_toTopOf="@id/tv_budget_title"
+
+        tools:text="sample text" />
+
+    <TextView
+        android:id="@+id/tv_currency_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:drawablePadding="4dp"
+        android:gravity="center_vertical"
+        android:text="@string/currency_cap"
+        android:textColor="@color/white"
+        app:drawableLeftCompat="@drawable/ic_baseline_budget_24"
+        app:layout_constraintStart_toStartOf="@id/tv_budget_title"
+        app:layout_constraintTop_toBottomOf="@id/tv_budget_title" />
+
+    <TextView
+        android:id="@+id/tv_currency_info"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="16dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+
+
+        app:layout_constraintBottom_toBottomOf="@id/tv_currency_title"
+        app:layout_constraintStart_toEndOf="@id/tv_currency_title"
+        app:layout_constraintTop_toTopOf="@id/tv_currency_title"
+
+        tools:text="sample text" />
+
+    <TextView
         android:id="@+id/tv_description_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -153,8 +215,8 @@
         android:text="@string/description_cap"
         android:textColor="@color/white"
         app:drawableLeftCompat="@drawable/ic_baseline_description_24"
-        app:layout_constraintStart_toStartOf="@id/tv_date_title"
-        app:layout_constraintTop_toBottomOf="@id/tv_date_title" />
+        app:layout_constraintStart_toStartOf="@id/tv_currency_title"
+        app:layout_constraintTop_toBottomOf="@id/tv_currency_title" />
 
     <TextView
         android:id="@+id/tv_description_info"

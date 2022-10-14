@@ -19,6 +19,7 @@
     <string name="name">Name</string>
     <string name="destination">Destination</string>
     <string name="description">Description</string>
+    <string name="currency">Currency</string>
     <string name="budget">Budget</string>
     <string name="require_risk_assessment">Require risk assessment?</string>
     <string name="yes">Yes</string>
@@ -28,7 +29,8 @@
     <string name="confirm_destination">Destination:</string>
     <string name="confirm_date">Date:</string>
     <string name="confirm_description">Description:</string>
-    <string name="confirm_budget">Description:</string>
+    <string name="confirm_currency">Currency:</string>
+    <string name="confirm_budget">Budget:</string>
     <string name="confirm_risk_assessment">Risk assessment:</string>
     <string name="add_a_trip">ADD A TRIP</string>
     <string name="add">ADD</string>
@@ -38,11 +40,13 @@
     <string name="no_trips_have_been_recorded_add_one">No trips have been recorded. Add one !</string>
     <string name="delete_all">Delete All</string>
     <string name="trip_info">Trip Info</string>
-    <string name="trip_name">TRIP NAME</string>
+    <string name="trip_name">TRIP: </string>
     <string name="destination_cap">DESTINATION</string>
-    <string name="date_cap">DATE</string>
-    <string name="risk_assessment_cap">RISK ASSESSMENT</string>
+    <string name="date_cap">DATE: </string>
+    <string name="risk_assessment_cap">RISK ASSESSMENT: </string>
     <string name="description_cap">DESCRIPTION</string>
+    <string name="budget_cap">BUDGET:</string>
+    <string name="currency_cap">CURRENCY:</string>
     <string name="expense">Expense</string>
     <string name="add_an_expense_no_cap">Add an expense</string>
     <string name="search_by_trip_name">Search by trip name</string>
