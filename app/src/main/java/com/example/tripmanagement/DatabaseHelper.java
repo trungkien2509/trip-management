@@ -8,7 +8,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     // create database
     public DatabaseHelper(Context context) {
-        super(context, "trip_database", null, 2);
+        super(context, "trip_database", null, 3);
     }
 
 
@@ -16,7 +16,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         String sql_create_trip_table = "Create table trips(trip_id integer primary key autoincrement," +
-                "name text not null, destination text not null, date text, risk_assessment text not null, description text, budget real not null, currency text )";
+                "name text not null, destination text not null, date text, risk_assessment text not null, description text, budget real not null, triptype text )";
         String sql_create_expense_table = "Create table expenses(expenses_id integer primary key autoincrement," +
                 "type text not null, amount real not null, time text not null, comments text, trip_id integer )";
         String[] statements = new String[]{sql_create_trip_table, sql_create_expense_table};

@@ -29,7 +29,7 @@
     <string name="confirm_destination">Destination:</string>
     <string name="confirm_date">Date:</string>
     <string name="confirm_description">Description:</string>
-    <string name="confirm_currency">Currency:</string>
+    <string name="confirm_triptype">Trip Type:</string>
     <string name="confirm_budget">Budget:</string>
     <string name="confirm_risk_assessment">Risk assessment:</string>
     <string name="add_a_trip">ADD A TRIP</string>
@@ -46,7 +46,7 @@
     <string name="risk_assessment_cap">RISK ASSESSMENT: </string>
     <string name="description_cap">DESCRIPTION</string>
     <string name="budget_cap">BUDGET:</string>
-    <string name="currency_cap">CURRENCY:</string>
+    <string name="triptype_cap">Trip Type:</string>
     <string name="expense">Expense</string>
     <string name="add_an_expense_no_cap">Add an expense</string>
     <string name="search_by_trip_name">Search by trip name</string>
@@ -67,4 +67,7 @@
     <string name="delete_the_expense">Delete the expense</string>
     <string name="confirm_datele_expense">Are you sure you want to delete this expense?</string>
     <string name="delete_expense_successfully">Delete successfully</string>
+    <string name="triptype">Trip type ?</string>
+    <string name="inbound">Inbound</string>
+    <string name="outbound">Outbound</string>
 </resources>

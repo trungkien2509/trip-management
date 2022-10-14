@@ -152,18 +152,18 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
                 android:fontFamily="@font/lora_variablefont_wght"
-                android:text="@string/confirm_currency"
+                android:text="@string/confirm_triptype"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/tv_confirm_currency"
+                android:id="@+id/tv_confirm_triptype"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/lora_variablefont_wght"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                tools:text="$" />
+                />
 
         </LinearLayout>
 

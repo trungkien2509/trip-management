@@ -9,11 +9,11 @@ public class Trip {
     private String date;
     private String riskAssessment;
     private String description;
-    private String currency;
+    private String triptype;
     private Double budget;
 
 
-    public Trip(int tripId, String tripName, String destination, String date, String riskAssessment, String description, Double budget, String currency) {
+    public Trip(int tripId, String tripName, String destination, String date, String riskAssessment, String description, Double budget, String triptype) {
         this.tripId = tripId;
         this.tripName = tripName;
         this.destination = destination;
@@ -21,7 +21,7 @@ public class Trip {
         this.riskAssessment = riskAssessment;
         this.description = description;
         this.budget = budget;
-        this.currency = currency;
+        this.triptype = triptype;
     }
 
     public int getTripId() {
@@ -80,12 +80,12 @@ public class Trip {
         this.budget = budget;
     }
 
-    public String getCurrency() {
-        return currency;
+    public String getTriptype() {
+        return triptype;
     }
 
-    public void setCurrency(String currency) {
-        this.currency = currency;
+    public void setTriptype(String triptype) {
+        this.triptype = triptype;
     }
 
 

@@ -43,7 +43,7 @@ public class ExpenseActivity extends AppCompatActivity {
     TextView tvDateInfo;
     TextView tvRiskAssessmentInfo;
     TextView tvDescriptionInfo;
-    TextView tvCurrencyInfo;
+    TextView tvTriptypeInfo;
     TextView tvBudgetInfo;
     int tripId = 0;
 
@@ -66,7 +66,7 @@ public class ExpenseActivity extends AppCompatActivity {
         String tripDestination = intent.getStringExtra("trip_destination");
         String tripDate = intent.getStringExtra("trip_date");
         String tripDescription = intent.getStringExtra("trip_description");
-        String tripCurrency = intent.getStringExtra("trip_currency");
+        String tripTriptype = intent.getStringExtra("trip_triptype");
         Double tripBudget = intent.getDoubleExtra("trip_budget",0.0);
         String tripRiskAssessment = intent.getStringExtra("trip_risk_assessment");
 
@@ -85,7 +85,7 @@ public class ExpenseActivity extends AppCompatActivity {
         tvDateInfo = findViewById(R.id.tv_date_info);
         tvRiskAssessmentInfo = findViewById(R.id.tv_risk_assessment_info);
         tvBudgetInfo = findViewById(R.id.tv_budget_info);
-        tvCurrencyInfo = findViewById(R.id.tv_currency_info);
+        tvTriptypeInfo = findViewById(R.id.tv_triptype_info);
         tvDescriptionInfo = findViewById(R.id.tv_description_info);
 
 
@@ -102,7 +102,7 @@ public class ExpenseActivity extends AppCompatActivity {
         tvDestinationInfo.setText(tripDestination);
         tvDateInfo.setText(tripDate);
         tvDescriptionInfo.setText(tripDescription);
-        tvCurrencyInfo.setText(tripCurrency);
+        tvTriptypeInfo.setText(tripTriptype);
         tvBudgetInfo.setText("£ " +tripBudget);
         tvRiskAssessmentInfo.setText(tripRiskAssessment);
 

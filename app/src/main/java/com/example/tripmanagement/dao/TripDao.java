@@ -27,9 +27,9 @@ public class TripDao {
             String riskAssessment = cs.getString(4);
             String description = cs.getString(5);
             Double budget = cs.getDouble(6);
-            String currency = cs.getString(7);
+            String triptype = cs.getString(7);
 
-            Trip trip = new Trip(tripId, tripName, destination, date, riskAssessment, description, budget, currency );
+            Trip trip = new Trip(tripId, tripName, destination, date, riskAssessment, description, budget, triptype );
             listOfTrips.add(trip);
             cs.moveToNext();
         }
@@ -39,7 +39,7 @@ public class TripDao {
     }
 
     // insert a trip
-    public static boolean insert(Context context, String name, String destination, String date, String riskAssessment, String description, Double budget, String currency) {
+    public static boolean insert(Context context, String name, String destination, String date, String riskAssessment, String description, Double budget, String triptype) {
         DatabaseHelper helper = new DatabaseHelper(context);
         SQLiteDatabase database = helper.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -49,7 +49,7 @@ public class TripDao {
         values.put("risk_assessment", riskAssessment);
         values.put("description", description);
         values.put("budget", budget);
-        values.put("currency", currency);
+        values.put("triptype", triptype);
         long newRow = database.insert("trips", null, values);
         return (newRow > 0);
     }
@@ -73,7 +73,7 @@ public class TripDao {
         values.put("risk_assessment", trip.getRiskAssessment());
         values.put("description", trip.getDescription());
         values.put("budget", trip.getBudget());
-        values.put("currency", trip.getCurrency());
+        values.put("triptype", trip.getTriptype());
         int row = database.update("trips", values, "trip_id=?", new String[]{trip.getTripId() + ""});
         return (row > 0);
     }

@@ -1,7 +1,7 @@
 package com.example.tripmanagement;
 
 import static com.example.tripmanagement.R.id.tv_confirm_budget;
-import static com.example.tripmanagement.R.id.tv_confirm_currency;
+import static com.example.tripmanagement.R.id.tv_confirm_triptype;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
@@ -35,6 +35,7 @@ import android.app.DatePickerDialog;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -340,7 +341,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 // user checked an item
-                Toast.makeText(MainActivity.this, which + "", Toast.LENGTH_SHORT).show();
+
                 choice[0] = which;
             }
         });
@@ -479,9 +480,9 @@ public class MainActivity extends AppCompatActivity {
         TextInputEditText tietDestination = view.findViewById(R.id.trip_destination_tiet);
         TextInputEditText tietDescription = view.findViewById(R.id.trip_description_tiet);
         TextInputEditText tietBudget = view.findViewById(R.id.trip_budget_tiet);
-        TextInputEditText tietCurrency = view.findViewById(R.id.trip_currency_tiet);
         TextInputEditText tietDate = view.findViewById(R.id.trip_date_tiet);
         RadioButton rbNo = view.findViewById(R.id.radio_button_no);
+        RadioButton rbOutbound = view.findViewById(R.id.radio_button_outbound);
         Button btnCancel = view.findViewById(R.id.cancel_btn);
         Button btnAdd = view.findViewById(R.id.add_trip_btn);
 
@@ -530,15 +531,19 @@ public class MainActivity extends AppCompatActivity {
                 String destination = Objects.requireNonNull(tietDestination.getText()).toString();
                 String date = Objects.requireNonNull(tietDate.getText()).toString();
                 String description = Objects.requireNonNull(tietDescription.getText()).toString();
-                String currency = Objects.requireNonNull(tietCurrency.getText()).toString();
                 Double budget = Objects.requireNonNull(Double.parseDouble(String.valueOf(tietBudget.getText())));
                 String riskAssessment = getResources().getString(R.string.yes);
                 if (rbNo.isChecked()) {
                     riskAssessment = getResources().getString(R.string.no);
                 }
 
+                String triptype = getResources().getString(R.string.inbound);
+                if (rbOutbound.isChecked()) {
+                    triptype = getResources().getString(R.string.outbound);
+                }
+
                 if (allRequiredFieldsFilled(name, destination, date)) {
-                    showConfirmationDialog(dialog, name, destination, date, riskAssessment, description, budget, currency);
+                    showConfirmationDialog(dialog, name, destination, date, riskAssessment, description, budget, triptype);
                 } else {
                     Toast.makeText(MainActivity.this, getResources().getString(R.string.fill_all_the_required_fields), Toast.LENGTH_SHORT).show();
                 }
@@ -552,7 +557,7 @@ public class MainActivity extends AppCompatActivity {
     /**
      * show confirm when adding a trip
      */
-    private void showConfirmationDialog(Dialog parentDialog, String name, String destination, String date, String riskAssessment, String description, Double budget, String currency) {
+    private void showConfirmationDialog(Dialog parentDialog, String name, String destination, String date, String riskAssessment, String description, Double budget, String triptype) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         LayoutInflater inflater = getLayoutInflater();
         View view = inflater.inflate(R.layout.dialog_add_trip_confirm, null);
@@ -566,7 +571,7 @@ public class MainActivity extends AppCompatActivity {
         TextView tvDestination = view.findViewById(R.id.tv_confirm_destination);
         TextView tvDate = view.findViewById(R.id.tv_confirm_date);
         TextView tvDescription = view.findViewById(R.id.tv_confirm_description);
-        TextView tvCurrency = view.findViewById(R.id.tv_confirm_currency);
+        TextView tvTriptype = view.findViewById(R.id.tv_confirm_triptype);
         TextView tvBudget = view.findViewById(tv_confirm_budget);
         TextView tvRiskAssessment = view.findViewById(R.id.tv_confirm_risk_assessment);
 
@@ -575,7 +580,7 @@ public class MainActivity extends AppCompatActivity {
         tvDate.setText(date);
         tvRiskAssessment.setText(riskAssessment);
         tvDescription.setText(description);
-        tvCurrency.setText(currency);
+        tvTriptype.setText(triptype);
         tvBudget.setText(Double.valueOf(budget).toString());
 
         btnCancel.setOnClickListener(new View.OnClickListener() {
@@ -590,7 +595,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View view) {
-                if (TripDao.insert(MainActivity.this, name, destination, date, riskAssessment, description, budget, currency)) {
+                if (TripDao.insert(MainActivity.this, name, destination, date, riskAssessment, description, budget, triptype)) {
                     Toast.makeText(MainActivity.this, getResources().getString(R.string.add_trip_successfully), Toast.LENGTH_SHORT).show();
                     tripList.clear();
                     tripList.addAll(TripDao.getAll(MainActivity.this));
@@ -630,17 +635,17 @@ public class MainActivity extends AppCompatActivity {
         TextInputEditText tietName = view.findViewById(R.id.edit_trip_name_tiet);
         TextInputEditText tietDestination = view.findViewById(R.id.edit_trip_destination_tiet);
         TextInputEditText tietDescription = view.findViewById(R.id.edit_trip_description_tiet);
-        TextInputEditText tietCurrency = view.findViewById(R.id.edit_trip_currency_tiet);
         TextInputEditText tietBudget = view.findViewById(R.id.edit_trip_budget_tiet);
         TextInputEditText tietDate = view.findViewById(R.id.edit_trip_date_tiet);
         RadioButton rbYes = view.findViewById(R.id.edit_radio_button_yes);
         RadioButton rbNo = view.findViewById(R.id.edit_radio_button_no);
+        RadioButton rbInbound = view.findViewById(R.id.edit_radio_button_inbound);
+        RadioButton rbOutbound = view.findViewById(R.id.edit_radio_button_outbound);
         Button btnCancel = view.findViewById(R.id.edit_cancel_btn);
         Button btnUpdate = view.findViewById(R.id.update_trip_btn);
 
         tietName.setText(selectedTrip.getTripName());
         tietDescription.setText(selectedTrip.getDescription());
-        tietCurrency.setText(selectedTrip.getCurrency());
         tietBudget.setText(selectedTrip.getBudget().toString());
         tietDestination.setText(selectedTrip.getDestination());
         tietDate.setText(selectedTrip.getDate());
@@ -648,6 +653,12 @@ public class MainActivity extends AppCompatActivity {
             rbYes.setChecked(true);
         } else {
             rbNo.setChecked(true);
+        }
+
+        if (selectedTrip.getTriptype().equals("Inbound")) {
+            rbInbound.setChecked(true);
+        } else {
+            rbOutbound.setChecked(true);
         }
 
         Calendar calendar = Calendar.getInstance();
@@ -696,12 +707,16 @@ public class MainActivity extends AppCompatActivity {
                     selectedTrip.setDestination(tietDestination.getText().toString());
                     selectedTrip.setDate(tietDate.getText().toString());
                     selectedTrip.setDescription(Objects.requireNonNull(tietDescription.getText()).toString());
-                    selectedTrip.setCurrency(Objects.requireNonNull(tietCurrency.getText()).toString());
                     selectedTrip.setBudget(Double.valueOf(tietBudget.getText().toString()));
                     selectedTrip.setRiskAssessment(getResources().getString(R.string.yes));
                     if (rbNo.isChecked()) {
                         selectedTrip.setRiskAssessment(getResources().getString(R.string.no));
                     }
+                    selectedTrip.setTriptype(getResources().getString(R.string.inbound));
+                    if (rbNo.isChecked()) {
+                        selectedTrip.setTriptype(getResources().getString(R.string.outbound));
+                    }
+
                     if (TripDao.update(MainActivity.this, selectedTrip)) {
                         Toast.makeText(MainActivity.this, getResources().getString(R.string.update_trip_successfully), Toast.LENGTH_SHORT).show();
                         tripList.clear();
@@ -740,9 +755,9 @@ public class MainActivity extends AppCompatActivity {
                         intent.putExtra("trip_destination", selectedTrip.getDestination());
                         intent.putExtra("trip_date", selectedTrip.getDate());
                         intent.putExtra("trip_description", selectedTrip.getDescription());
-                        intent.putExtra("trip_currency", selectedTrip.getCurrency());
                         intent.putExtra("trip_budget", selectedTrip.getBudget());
                         intent.putExtra("trip_risk_assessment", selectedTrip.getRiskAssessment());
+                        intent.putExtra("trip_triptype", selectedTrip.getTriptype());
                         startActivity(intent);
                     }
 
