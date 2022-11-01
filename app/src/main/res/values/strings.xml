@@ -30,7 +30,7 @@
     <string name="confirm_date">Date:</string>
     <string name="confirm_description">Description:</string>
     <string name="confirm_triptype">Trip Type:</string>
-    <string name="confirm_budget">Budget:</string>
+    <string name="confirm_budget">Budget: £ </string>
     <string name="confirm_risk_assessment">Risk assessment:</string>
     <string name="add_a_trip">ADD A TRIP</string>
     <string name="add">ADD</string>
@@ -78,5 +78,6 @@
     <string name="label_backup_firestore">Doing Backup</string>
     <string name="confirm_backup_all_trips">Are you sure you want to back up all the trips?</string>
 
-
+    <string name="no_data_found">No data found</string>
+    <string name="no_data_found_sub">Search another name and check your filter</string>
 </resources>

@@ -54,6 +54,8 @@ import java.util.Objects;
 import com.example.tripmanagement.model.Backup;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import android.media.MediaPlayer;
+
 
 public class MainActivity extends AppCompatActivity {
     RecyclerView rvTrip;
@@ -63,7 +65,10 @@ public class MainActivity extends AppCompatActivity {
     TextView tvDeleteAll;
     TextView tvBackupAll;
     ImageView ivBackground;
+    ImageView ivNoData;
     TextView tvNoTrip;
+    TextView tvNoData;
+    TextView tvNoDataSub;
     SearchView svSearch;
     ImageView btnFilter;
     TextView tvFilter;
@@ -104,7 +109,10 @@ public class MainActivity extends AppCompatActivity {
         tvDeleteAll = findViewById(R.id.tv_delete_all);
         tvBackupAll = findViewById(R.id.tv_backup_all);
         ivBackground = findViewById(R.id.iv_background_image);
+        ivNoData = findViewById(R.id.iv_no_data_image);
         tvNoTrip = findViewById(R.id.tv_no_trip);
+        tvNoData = findViewById(R.id.tv_no_data);
+        tvNoDataSub = findViewById(R.id.tv_no_data_sub);
         svSearch = findViewById(R.id.sv_search);
         btnFilter = findViewById(R.id.iv_search_picker);
         tvFilter = findViewById(R.id.filter_add_btn);
@@ -123,10 +131,18 @@ public class MainActivity extends AppCompatActivity {
         // add button onclick
         btnAdd.setOnClickListener(view -> showAddDialog());
 
+
+
+
+
+
+
         // swipe action
         touchListener = new RecyclerTouchListener(this, rvTrip);
         swipeToDisplayMenu();
         rvTrip.addOnItemTouchListener(touchListener);
+
+
 
         // delete all button onclick
         tvDeleteAll.setOnClickListener(view -> showDeleteAllDialog());
@@ -468,10 +484,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         tripListAdapter.setFilteredList(filteredTripList);
-        if (filteredTripList.isEmpty()) {
-            // TODO: show empty
-            Toast.makeText(this, "No data found", Toast.LENGTH_SHORT).show();
-        }
+        displaySuitableViewsWhenListIsEmptyAndViceVersa();
     }
 
     /**
@@ -495,7 +508,6 @@ public class MainActivity extends AppCompatActivity {
         RadioButton rbOutbound = view.findViewById(R.id.radio_button_outbound);
         Button btnCancel = view.findViewById(R.id.cancel_btn);
         Button btnAdd = view.findViewById(R.id.add_trip_btn);
-
         Calendar calendar = Calendar.getInstance();
         DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
             @Override
@@ -541,13 +553,20 @@ public class MainActivity extends AppCompatActivity {
                 String destination = Objects.requireNonNull(tietDestination.getText()).toString();
                 String date = Objects.requireNonNull(tietDate.getText()).toString();
                 String description = Objects.requireNonNull(tietDescription.getText()).toString();
-                Double budget = Objects.requireNonNull(Double.parseDouble(String.valueOf(tietBudget.getText())));
+                Double budget = 0.0;
+
+                if (!tietBudget.getText().toString().isEmpty()) {
+                    budget = Double.parseDouble(tietBudget.getText().toString()) ;
+                }
+
+
                 String riskAssessment = getResources().getString(R.string.yes);
+                String triptype = getResources().getString(R.string.inbound);
                 if (rbNo.isChecked()) {
                     riskAssessment = getResources().getString(R.string.no);
                 }
 
-                String triptype = getResources().getString(R.string.inbound);
+
                 if (rbOutbound.isChecked()) {
                     triptype = getResources().getString(R.string.outbound);
                 }
@@ -582,7 +601,7 @@ public class MainActivity extends AppCompatActivity {
         TextView tvDate = view.findViewById(R.id.tv_confirm_date);
         TextView tvDescription = view.findViewById(R.id.tv_confirm_description);
         TextView tvTriptype = view.findViewById(R.id.tv_confirm_triptype);
-        TextView tvBudget = view.findViewById(tv_confirm_budget);
+        TextView tvBudget = view.findViewById(R.id.tv_confirm_budget);
         TextView tvRiskAssessment = view.findViewById(R.id.tv_confirm_risk_assessment);
 
         tvName.setText(name);
@@ -698,13 +717,15 @@ public class MainActivity extends AppCompatActivity {
                         calendar.get(Calendar.DAY_OF_MONTH)).show();
             }
         });
-
+        //deletesound
+        final MediaPlayer deletesound = MediaPlayer.create(this,R.raw.delete_sound);
         // cancel onclick
         btnCancel.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
                 dialog.cancel();
+                deletesound.start();
             }
         });
 
@@ -836,6 +857,11 @@ public class MainActivity extends AppCompatActivity {
                         // delete all expense
                         ExpenseDao.deleteAll(MainActivity.this);
                         Toast.makeText(getApplicationContext(), getResources().getString(R.string.delete_trip_successfully), Toast.LENGTH_SHORT).show();
+
+
+
+
+
                         tripList.clear();
                         tripList.addAll(TripDao.getAll(MainActivity.this));
                         Collections.reverse(tripList);
@@ -901,7 +927,6 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-
     /**
      * display background image when no trips
      */
@@ -909,11 +934,29 @@ public class MainActivity extends AppCompatActivity {
         if (tripList.isEmpty()) {
             tvNoTrip.setVisibility(View.VISIBLE);
             ivBackground.setVisibility(View.VISIBLE);
-            tvDeleteAll.setVisibility(View.GONE);
+            tvDeleteAll.setVisibility(View.INVISIBLE);
+            tvBackupAll.setVisibility(View.INVISIBLE);
+            ivNoData.setVisibility(View.INVISIBLE);
+            tvNoData.setVisibility(View.INVISIBLE);
+            tvNoDataSub.setVisibility(View.INVISIBLE);
+            tvBackupAll.setVisibility(View.INVISIBLE);
         } else {
-            tvNoTrip.setVisibility(View.GONE);
-            ivBackground.setVisibility(View.GONE);
+            if (filteredTripList.isEmpty()) {
+                ivNoData.setVisibility(View.VISIBLE);
+                tvNoData.setVisibility(View.VISIBLE);
+                tvNoDataSub.setVisibility(View.VISIBLE);
+            } else {
+                ivNoData.setVisibility(View.INVISIBLE);
+                tvNoData.setVisibility(View.INVISIBLE);
+                tvNoDataSub.setVisibility(View.INVISIBLE);
+                tvDeleteAll.setVisibility(View.VISIBLE);
+                tvBackupAll.setVisibility(View.VISIBLE);
+            }
+            tvNoTrip.setVisibility(View.INVISIBLE);
+            ivBackground.setVisibility(View.INVISIBLE);
             tvDeleteAll.setVisibility(View.VISIBLE);
+            tvBackupAll.setVisibility(View.VISIBLE);
+
         }
     }
 

@@ -211,7 +211,7 @@ public class ExpenseActivity extends AppCompatActivity {
                     String comment = Objects.requireNonNull(tietComment.getText()).toString();
 
                     if (ExpenseDao.insert(ExpenseActivity.this, type, amount, time, comment, tripId)) {
-                        Toast.makeText(ExpenseActivity.this, "Add new trip successfully!!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ExpenseActivity.this, "Add new expense successfully!!", Toast.LENGTH_SHORT).show();
                         expenseList.clear();
                         expenseList.addAll(ExpenseDao.getExpenseList(ExpenseActivity.this, tripId));
                         Collections.reverse(expenseList);
@@ -219,7 +219,7 @@ public class ExpenseActivity extends AppCompatActivity {
                         dialog.cancel();
 
                     } else {
-                        Toast.makeText(ExpenseActivity.this, "Add new trip failed!!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ExpenseActivity.this, "Add new expense failed!!", Toast.LENGTH_SHORT).show();
                     }
                 } else {
                     Toast.makeText(ExpenseActivity.this, "Please fill all the required fields", Toast.LENGTH_SHORT).show();
