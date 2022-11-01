@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "361127625311",
+    "project_id": "trip-management-ae248",
+    "storage_bucket": "trip-management-ae248.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:361127625311:android:023f2191412b83e07051ea",
+        "android_client_info": {
+          "package_name": "com.example.tripmanagement"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "361127625311-55s0gat4vt8m614ctp62lsp9ed8ggjid.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAhA2MXuYD2el_1HNXjcUSrLTmaC4W1_RA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "361127625311-55s0gat4vt8m614ctp62lsp9ed8ggjid.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
