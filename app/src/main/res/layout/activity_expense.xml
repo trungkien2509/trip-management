@@ -38,7 +38,7 @@
         android:layout_marginTop="8dp"
         android:drawablePadding="4dp"
         android:gravity="center_vertical"
-        android:text="@string/trip_name"
+
         android:textColor="@color/white"
         app:drawableLeftCompat="@drawable/ic_baseline_subtitles_24"
         app:layout_constraintStart_toStartOf="parent"
@@ -46,8 +46,8 @@
 
     <TextView
         android:id="@+id/tv_name_info"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_width="320dp"
+        android:layout_height="24dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="16dp"
         android:ellipsize="end"
@@ -55,8 +55,10 @@
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="@id/tv_name_title"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.347"
         app:layout_constraintStart_toEndOf="@id/tv_name_title"
         app:layout_constraintTop_toTopOf="@id/tv_name_title"
+        app:layout_constraintVertical_bias="0.0"
         tools:text="sample text" />
 
     <TextView
@@ -66,7 +68,6 @@
         android:layout_marginTop="8dp"
         android:drawablePadding="4dp"
         android:gravity="center_vertical"
-        android:text="@string/destination_cap"
         android:textColor="@color/white"
         app:drawableLeftCompat="@drawable/ic_baseline_place_24"
         app:layout_constraintStart_toStartOf="@id/tv_name_title"
@@ -74,16 +75,20 @@
 
     <TextView
         android:id="@+id/tv_destination_info"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_width="322dp"
+        android:layout_height="42dp"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
         android:layout_marginEnd="16dp"
         android:ellipsize="end"
         android:maxLines="2"
         android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_destination_title"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@id/tv_destination_title"
         app:layout_constraintTop_toBottomOf="@id/tv_destination_title"
+        app:layout_constraintVertical_bias="0.608"
         tools:text="sample text" />
 
     <TextView
@@ -183,7 +188,7 @@
         android:gravity="center_vertical"
         android:text="@string/triptype_cap"
         android:textColor="@color/white"
-        app:drawableLeftCompat="@drawable/ic_baseline_budget_24"
+        app:drawableLeftCompat="@drawable/ic_baseline_triptype"
         app:layout_constraintStart_toStartOf="@id/tv_budget_title"
         app:layout_constraintTop_toBottomOf="@id/tv_budget_title" />
 

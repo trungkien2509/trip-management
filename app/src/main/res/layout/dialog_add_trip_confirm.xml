@@ -189,7 +189,7 @@
                 android:fontFamily="@font/lora_variablefont_wght"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                tools:text="$8000" />
+                tools:text="8000" />
 
         </LinearLayout>
 
