@@ -83,4 +83,30 @@ public class ExpenseDao {
         int row = database.delete("expenses", "expenses_id=?", new String[]{expenseId + ""});
         return (row > 0);
     }
+
+
+    // get all for backup
+    public static ArrayList<Expense> getAll(Context context) {
+        ArrayList<Expense> listOfExpense = new ArrayList<>();
+        DatabaseHelper helper = new DatabaseHelper(context);
+        SQLiteDatabase database = helper.getReadableDatabase();
+        Cursor cs = database.rawQuery("Select * from expenses ",null );
+        cs.moveToFirst();
+        while (!cs.isAfterLast()) {
+            int expenseId = cs.getInt(0);
+            String type = cs.getString(1);
+            double amount = cs.getDouble(2);
+            String time = cs.getString(3);
+            String comment = cs.getString(4);
+            int tripId = cs.getInt(5);
+
+
+            Expense expense = new Expense(expenseId, type, amount, time, comment, tripId);
+            listOfExpense.add(expense);
+            cs.moveToNext();
+        }
+        cs.close();
+        database.close();
+        return listOfExpense;
+    }
 }

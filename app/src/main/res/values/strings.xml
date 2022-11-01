@@ -70,4 +70,13 @@
     <string name="triptype">Trip type ?</string>
     <string name="inbound">Inbound</string>
     <string name="outbound">Outbound</string>
+
+    <string name="backup_all">Backup </string>
+    <string name="backup_all_trips">Backup all the trips</string>
+    <string name="backup_success">Successfully Backup</string>
+    <string name="backup_fail">Backup Failed</string>
+    <string name="label_backup_firestore">Doing Backup</string>
+    <string name="confirm_backup_all_trips">Are you sure you want to back up all the trips?</string>
+
+
 </resources>

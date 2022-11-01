@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +22,7 @@ import android.view.View;
 import com.example.tripmanagement.adapter.TripListAdapter;
 import com.example.tripmanagement.dao.ExpenseDao;
 import com.example.tripmanagement.dao.TripDao;
+import com.example.tripmanagement.model.Expense;
 import com.example.tripmanagement.model.Trip;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputEditText;
@@ -49,6 +51,9 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.Objects;
 
+import com.example.tripmanagement.model.Backup;
+import com.google.firebase.firestore.FirebaseFirestore;
+
 
 public class MainActivity extends AppCompatActivity {
     RecyclerView rvTrip;
@@ -56,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
     FloatingActionButton btnAdd;
     RecyclerTouchListener touchListener;
     TextView tvDeleteAll;
+    TextView tvBackupAll;
     ImageView ivBackground;
     TextView tvNoTrip;
     SearchView svSearch;
@@ -96,6 +102,7 @@ public class MainActivity extends AppCompatActivity {
         rvTrip = findViewById(R.id.trip_list_rv);
         btnAdd = findViewById(R.id.add_btn);
         tvDeleteAll = findViewById(R.id.tv_delete_all);
+        tvBackupAll = findViewById(R.id.tv_backup_all);
         ivBackground = findViewById(R.id.iv_background_image);
         tvNoTrip = findViewById(R.id.tv_no_trip);
         svSearch = findViewById(R.id.sv_search);
@@ -123,6 +130,9 @@ public class MainActivity extends AppCompatActivity {
 
         // delete all button onclick
         tvDeleteAll.setOnClickListener(view -> showDeleteAllDialog());
+
+        // backup all button onclick
+        tvBackupAll.setOnClickListener(view -> showBackupAllDialog());
 
         // search settings
         svSearch.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -603,8 +613,8 @@ public class MainActivity extends AppCompatActivity {
                     tripListAdapter.notifyDataSetChanged();
                     filterList(query);
                     displaySuitableViewsWhenListIsEmptyAndViceVersa();
-                    secondDialog.cancel();
-                    parentDialog.cancel();
+                    secondDialog.dismiss();
+                    parentDialog.dismiss();
                 } else {
                     Toast.makeText(MainActivity.this, getResources().getString(R.string.add_trip_failed), Toast.LENGTH_SHORT).show();
                 }
@@ -844,6 +854,53 @@ public class MainActivity extends AppCompatActivity {
         // Showing Alert Dialog
         alertDialogDelete.show();
     }
+
+
+    /**
+     * this function show dialog when clicking backup all
+     */
+
+    private void showBackupAllDialog() {
+        AlertDialog.Builder alertDialogBackup = new AlertDialog.Builder(MainActivity.this);
+
+        // Setting Dialog Title
+        alertDialogBackup.setTitle(R.string.backup_all_trips);
+        alertDialogBackup.setMessage(R.string.confirm_backup_all_trips);
+
+        // Setting OK Button
+        alertDialogBackup.setPositiveButton("YES",
+                (dialog, which) -> {
+                    ArrayList<Trip> trips = TripDao.getAll(this);
+                    ArrayList<Expense> expenses = ExpenseDao.getAll(this);
+                    String deviceName = Build.MANUFACTURER
+                            + " " + Build.MODEL + " " + Build.VERSION.RELEASE
+                            + " " + Build.VERSION_CODES.class.getFields()[android.os.Build.VERSION.SDK_INT].getName();
+
+                    Backup backup = new Backup(new Date(), deviceName, trips, expenses);
+
+                    FirebaseFirestore.getInstance().collection("Trip management")
+                            .add(backup)
+                            .addOnSuccessListener(document -> {
+                                Toast.makeText(this, R.string.backup_success, Toast.LENGTH_SHORT).show();
+                                document.getId();
+                            })
+                            .addOnFailureListener(e -> {
+                                Toast.makeText(this, R.string.backup_fail, Toast.LENGTH_SHORT).show();
+                                e.printStackTrace();
+                            });
+                });
+
+
+        // Setting Negative "NO" Btn
+        alertDialogBackup.setNegativeButton("NO",
+                (dialog, which) -> dialog.cancel());
+
+        // Showing Alert Dialog
+        alertDialogBackup.show();
+    }
+
+
+
 
     /**
      * display background image when no trips
